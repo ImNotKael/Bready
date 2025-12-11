@@ -13,13 +13,13 @@
 
   <main class="grid grid-cols-4 gap-3 max-w-4xl mx-auto p-6 mb-5 text-white rounded shadow-2xl text-center">
     {% for x in products %}
-      <div class="grid rounded shadow bg-orange-700 border-2 border-black">
+      <a href="/product/{{x['ID']}}" class="grid rounded shadow bg-orange-700 border-2 border-black">
       <img class="h-25 mx-auto mt-4 w-40 rounded border-1 border-black" src="{{ x['Image'] }}" width="300" height="300">
       <h1 class="font-bold">{{x["Name"]}}</h1> <br>
       <div class="text-right text-s pb-3 pr-3">
         ${{x["Price"]}} <br>
       </div>
-      </div>
+      </a>
     {% endfor %}
   </main>
   </body>
