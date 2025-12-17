@@ -6,30 +6,24 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <body class="bg-orange-100">
-    {% include "components/navbar.html.jinja" %}
+    {%include "components/navbar.html.jinja"%}
 
     {% for message in get_flashed_messages() %}
         <li>{{ message }}</li>
     {%endfor%}
-
+    <div class="flex justify-center m-5">
+    <h1 class="font-bold text-4xl">Log In!</h1>
+    </div>
     <div class="flex justify-center bg-orange-400 border-2 border-black mx-auto w-50 rounded shadow">
         <form method="post" class="flex flex-col items-center gap-2">
-            <label>First Name</label>
-            <input class="bg-orange-200" name="name" required>
 
             <label>Email</label>
             <input class="bg-orange-200" name="email" required type="email">
 
             <label>Password</label>
             <input class="bg-orange-200" name="password" required type="password">
-        
-            <label>Confirm Password</label>
-            <input class="bg-orange-200" name="confirm_password" required type="password">
 
-            <label>Address</label>
-            <input class="bg-orange-200" name="address" required type="address">
-
-            <button name="submit">Register</button>
+            <button name="submit">Log in</button>
         </form>
     </div>
   </body>
