@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, flash, redirect
+from flask import Flask, render_template, request, flash, redirect , abort
 
-from flask_login import LoginManager, login_user
+from flask_login import LoginManager, login_user , logout_user , login_required
 
 import pymysql
 import pymysql.cursors
@@ -15,6 +15,7 @@ config = Dynaconf(settings_file=["settings.toml"])
 app.secret_key = config.secret_key
 
 login_manager = LoginManager(app)
+login_manager.login_view = '/login'
 
 class User:
     is_authenticated = True
@@ -74,6 +75,8 @@ def product_page(product_id):
     cursor.execute("SELECT * FROM `Product` WHERE `ID` = %s", (product_id))
     result = cursor.fetchone()
     connection.close()
+    if result is None:
+        abort(404)
     return render_template("product.html.jinja", product=result)
 
 @app.route("/register", methods=["POST" , "GET" ])
@@ -124,12 +127,17 @@ def login():
         elif password != result["Password"]:
             flash("Incorrect password")
         else:
-            login(User(result))
+            login_user(User(result))
             return redirect('/browse')
 
     return render_template("login.html.jinja")
 
-@app.route("/logout")
+@app.route("/logout" , methods = ["POST" , "GET"])
+@login_required
 def logout():
-    
+    logout_user()
     return redirect("/")
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html.jinja'), 404 

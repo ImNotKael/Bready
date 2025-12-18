@@ -5,46 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
-  <body class="bg-amber-200">
+  <body class="min-h-screen bg-gradient-to-b from-orange-300 via-orange-500 to-amber-900">
     {%include "components/navbar.html.jinja"%}
-    <div class="flex justify-between m-40 rounded shadow">
+    <div class="flex flex-col justify-center items-center m-40 rounded shadow bg-orange-300 text-center border-2 border-black">
         <div>
-            <p>INSERT IMAGE HERE</p>
+        <h1 class="text-4xl p-5 font-bold">Bready to check out all kinds of breads that you can think of?</h1>
         </div>
-        <div>
-            <p class="text-3xl text-underline"> This bread as of right now is currently on sale for $0.99. WOW!</p>
-        </div>
-    </div>
-    <h1 class="font-bold m-auto text-center text-4xl"> | All featured Breads |</h1>
-    <div class="flex justify-between m-40 rounded shadow">
-        <div class="text-2xl text-underline">
-            <p>MOST POPULAR BREAD!</p>
-            <p>Plain Bagel</p>
-            <p>$1.49</p>
-        </div>
-        <div>
-            <p>INSERT IMAGE HERE</p>
-        </div>
-    </div>
-
-    <div class="flex justify-between m-40 rounded shadow">
-        <div>
-            <p>INSERT IMAGE HERE</p>
-        </div>
-        <div class="text-2xl text-underline">
-            <p>MOST POPULAR NATIONAL BREAD!</p>
-            <p>Baguette</p>
-            <p>$2.49</p>
-        </div>
-    </div>
-    <div class="flex justify-between m-40 rounded shadow">
-        <div class="text-2xl text-underline">
-            <p>MOST HEALTHIEST BREAD!</p>
-            <p>Whole Wheat Bread</p>
-            <p>$1.99</p>
-        </div>
-        <div>
-            <p>INSERT IMAGE HERE</p>
+        <div class="m-4">
+            <a class="bg-orange-200 mx-auto p-4 rounded shadow hover:bg-orange-500" href="/browse">Browse here NOW!</a>
         </div>
     </div>
   </body>

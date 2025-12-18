@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
-  <body class="bg-orange-100">
+  <body class="min-h-screen bg-gradient-to-b from-orange-300 via-orange-500 to-amber-900">
     {%include "components/navbar.html.jinja"%}
 
     {% for message in get_flashed_messages() %}
@@ -18,10 +18,10 @@
         <form method="post" class="flex flex-col items-center gap-2">
 
             <label>Email</label>
-            <input class="bg-orange-200" name="email" required type="email">
+            <input class="bg-orange-200 border-1 border-black" name="email" required type="email">
 
             <label>Password</label>
-            <input class="bg-orange-200" name="password" required type="password">
+            <input class="bg-orange-200 border-1 border-black" name="password" required type="password">
 
             <button name="submit">Log in</button>
         </form>

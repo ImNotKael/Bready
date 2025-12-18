@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    {% extends "404.html" %} 
+
+    {% block title %}Page Not Found{% endblock %}
+
+    {% block content %}
+    <div style="text-align: center; padding: 50px;">
+        <h1>404</h1>
+        <p>Sorry, the page you are looking for could not be found.</p>
+        <a href="/">Go to the home page</a>
+    </div>
+    {% endblock %}
+  </body>
+</html>
