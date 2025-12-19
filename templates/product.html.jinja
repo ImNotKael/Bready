@@ -16,9 +16,12 @@
             <h1 class="text-3xl m-4"> {{ product['Description'] }} </h1>
             <h1 class="text-3xl m-4">Type: {{ product['Category'] }} </h1>
             <h1 class="text-3xl m-4">Price: ${{ product['Price'] }} </h1>
-            <div class="bg-amber-800 text-xl mx-auto max-w-20/100 rounded shadow p-2 border-1 border-black text-white">
-                <button>ADD TO CART</button>
-            </div>
+            <form method="post" action="/product/{{ product['ID'] }}/add_to_cart">
+                <label>How much you want:</label>
+                <input type="number" name="qty" value="1" min="1" max="10">
+
+                <button class="bg-amber-800 text-xl mx-auto max-w-20/100 rounded shadow p-2 border-1 border-black text-white hover:bg-orange-500">ADD TO CART</button>
+            </form>
         </div>
     </div>
   </body>

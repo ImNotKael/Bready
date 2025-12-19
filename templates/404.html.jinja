@@ -5,17 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
-  <body>
-    {% extends "404.html" %} 
-
-    {% block title %}Page Not Found{% endblock %}
-
-    {% block content %}
-    <div style="text-align: center; padding: 50px;">
-        <h1>404</h1>
-        <p>Sorry, the page you are looking for could not be found.</p>
-        <a href="/">Go to the home page</a>
-    </div>
-    {% endblock %}
+  <body class="min-h-screen bg-gradient-to-b from-orange-300 via-orange-500 to-amber-900">
+      {%include "components/navbar.html.jinja"%}
+      <div class="flex flex-col justify-center flex-center">
+        <div>
+        <p>404</p>
+        </div>
+        <div>
+        <p>It seems that you aren't bready for this page!</p>
+        </div>
+        <div>
+        <a href="/">Go to homepage</a>
+        </div>
+      </div>
   </body>
 </html>
