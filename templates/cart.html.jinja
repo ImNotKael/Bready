@@ -10,13 +10,13 @@
     {%include "components/navbar.html.jinja"%}
     <h1 class="text-center font-bold text-4xl m-4">Your cart</h1>
 
-    <main class="max-w-4xl mx-auto p-6 mb-5 bg-orange-100 ml-30">
+    <main class="max-w-4xl p-6 mb-5 bg-orange-100 ml-30">
     {% for x in cart %}
-      <div class="flex flex-row items-center gap-5">
-        <img class="h-50 mx-auto w-70 m-10 rounded border-1 border-black ml-10" src="{{ x['Image'] }}" width="300" height="300">
+      <div class="flex flex-row m-5 items-center gap-5">
+        <img class="h-50 w-70 rounded border-1 border-black" src="{{ x['Image'] }}">
         <div><h1 class="font-bold">{{x["Name"]}}</h1></div>
         <div><h1 class="font-bold">Quantity: {{x["Quantity"]}}</h1></div>
-        <div><h1 class="font-bold">${{ x['Price'] * x['Quantity'] }}</h1></div>
+        <div class="flex justify-right"><h1 class="font-bold">${{ x['Price'] * x['Quantity'] }}</h1></div>
       </div>
     {% endfor %}
     </main>
