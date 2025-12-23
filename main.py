@@ -90,7 +90,7 @@ def add_to_cart(product_id):
         VALUES (%s, %s, %s)
         ON DUPLICATE KEY UPDATE
         `Quantity` = `Quantity` + %s
-    """ , (quantity , product_id , current_user.id , quantity))
+    """ , (quantity , product_id , current_user.id))
     connection.close
     return redirect('/cart')
 
@@ -156,4 +156,18 @@ def logout():
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return render_template('404.html.jinja'), 404 
+    return render_template('404.html.jinja'), 404
+
+@app.route('/cart')
+@login_required
+def cart():
+    connection = connect_db()
+    cursor = connection.cursor()
+    cursor.execute("""
+    SELECT * FROM `Cart`
+    JOIN `Product` ON `Product`.`ID` = `Cart`.`ProductID`
+    WHERE `UserID` = %s
+    """, (current_user.id))
+    result = cursor.fetchall()
+    connection.close()
+    return render_template("cart.html.jinja" , cart=result)
