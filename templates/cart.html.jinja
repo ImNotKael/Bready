@@ -8,33 +8,42 @@
   </head>
   <body class="min-h-screen bg-gradient-to-b from-orange-300 via-orange-500 to-amber-900">
     {%include "components/navbar.html.jinja"%}
-    {%if not cart%}
-    <h1 class="text-center font-bold text-4xl m-4">You have nothing in your cart</h1>
 
-    {%else%}
+    {% if cart %}
     <h1 class="text-center font-bold text-4xl m-4">Your cart</h1>
 
-
-    <main class="max-w-4xl p-6 mb-5 bg-orange-100 ml-30">
+    <h1 class="font-bold text-3xl text-white text-center"> Total: ${{ total }}</h1>
     {% for x in cart %}
-      <div class="flex flex-row m-5 items-center gap-5">
-        <img class="h-50 w-70 rounded border-1 border-black" src="{{ x['Image'] }}">
-        <div><h1 class="font-bold">{{x["Name"]}}</h1></div>
-        <div>
-            <form method="post" action="/cart/{{ x['ProductID'] }}/update_qty">
-                <input class="w-8" name="qty" type="number" value="{{x['Quantity']}}">
+    <main class="flex flex-col">
+      <div class="max-w-4xl p-6 mb-5 bg-orange-100">
+    
+        <div class="flex flex-row m-5 items-center gap-5">
+          <img class="h-50 w-70 rounded border-1 border-black" src="{{ x['Image'] }}">
+          <div><h1 class="font-bold max-w-10">{{x["Name"]}}</h1></div>
+          <div>
+              <form method="post" action="/cart/{{ x['ProductID'] }}/update_qty">
+                <input class="w-8 hover:bg-white" name="qty" type="number" value="{{x['Quantity']}}">
                 <button class="hover:bg-orange-300 p-2 cursor-pointer" type="submit">Update</button>
-            </form>
-            <form method="post" action="/cart/{{ x['ProductID'] }}/delete_qty">
-                <button class="hover:bg-orange-300 p-2 cursor-pointer" type="submit">Delete</button>
-            </form>
+              </form>
+          </div>
+          <div>
+              <form method="post" action="/cart/{{ x['ProductID'] }}/delete_qty">
+                  <button class="hover:bg-orange-300 p-2 cursor-pointer" type="submit">Delete</button>
+              </form>
+          </div>
+
+
+          <div class="flex justify-right"><h1 class="font-bold">Total Price: ${{ x['Price'] * x['Quantity'] }}</h1></div>
         </div>
-
-
-        <div class="flex justify-right"><h1 class="font-bold">${{ x['Price'] * x['Quantity'] }}</h1></div>
       </div>
-    {% endfor %}
-    </main>
+      </main>
+      {% endfor %}
+    {%else%}
+    <h1 class="text-center font-bold text-4xl m-4">You have nothing in your cart</h1>
+
+    <div class="flex justify-center">
+    <a class="text-black bg-orange-100 p-5 hover:bg-orange-600 hover:text-white" href="/browse">Browse here!</a>
+    </div>
     {%endif%}
   </body>
 </html>

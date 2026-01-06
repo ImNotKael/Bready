@@ -169,8 +169,13 @@ def cart():
     WHERE `UserID` = %s
     """, (current_user.id))
     result = cursor.fetchall()
+
+    total = 0
+    for item in result:
+        total = total + item['Price'] * item['Quantity']
     connection.close()
-    return render_template("cart.html.jinja" , cart=result)
+
+    return render_template("cart.html.jinja" , cart=result, total = total)
 
 @app.route("/cart/<product_id>/update_qty", methods=["POST"])
 @login_required
@@ -192,10 +197,11 @@ def update_cart(product_id):
 def delete_cart(product_id):
     connection = connect_db()
     cursor = connection.cursor()
+    total = 0
     cursor.execute("""
-    DELETE `Cart`
+    DELETE FROM `Cart`
     WHERE `ProductID` = %s AND `UserID` = %s
     """, (product_id , current_user.id))
-    connection.close
+    connection.close()
 
     return redirect('/cart')
