@@ -197,7 +197,6 @@ def update_cart(product_id):
 def delete_cart(product_id):
     connection = connect_db()
     cursor = connection.cursor()
-    total = 0
     cursor.execute("""
     DELETE FROM `Cart`
     WHERE `ProductID` = %s AND `UserID` = %s
@@ -205,3 +204,40 @@ def delete_cart(product_id):
     connection.close()
 
     return redirect('/cart')
+
+@app.route('/checkout' , methods=["POST" , "GET"])
+@login_required
+def checkout():
+    connection = connect_db()
+    cursor = connection.cursor()
+    cursor.execute("""
+    SELECT * FROM `Cart`
+    JOIN `Product` ON `Product`.`ID` = `Cart`.`ProductID`
+    WHERE `UserID` = %s
+    """, (current_user.id))
+    result = cursor.fetchall()
+
+    total = 0
+    for item in result:
+        total = total + item['Price'] * item['Quantity']
+
+    if request.method == 'POST':
+        cursor.execute("""
+        INSERT INTO `Sale` (`UserID`) VALUES (%s)
+        """ , (current_user.id))
+        sale = cursor.lastrowid
+        for item in result:
+            cursor.execute("""
+            INSERT INTO `SaleCart` (`SaleID` , `ProductID` , `Quantity`)
+            VALUES (%s, %s, %s)
+            """ , (sale, item['ProductID'] , item['Quantity']))
+
+        cursor.execute("DELETE FROM `Cart` WHERE `UserID` = %s" , (current_user.id))
+
+        return redirect('/thank-you')
+    connection.close()
+    return render_template("checkout.html.jinja" , cart=result, total = total)
+
+@app.route("/thank-you")
+def thankyou():
+    return render_template("thankyou.html.jinja")
