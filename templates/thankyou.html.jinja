@@ -6,8 +6,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <body class="min-h-screen bg-gradient-to-b from-orange-300 via-orange-500 to-amber-900">
-    <h1 class="text-3xl font-bold underline">
-      thank you
-    </h1>
+    {%include "components/navbar.html.jinja"%}
+    <main>
+      <div class="m-auto p-30 w-250 mt-10 flex flex-col text-center gap-3 bg-amber-100">
+        <div><h1 class="text-4xl font-bold">Thank you for ordering your items!</h1></div>
+        <div><h1 class="text-3xl font-bold">Your order will be bready to go</h1></div>
+        <div><a class="rounded-2xl p-3 hover:bg-orange-300 font-bold" href="/browse">Browse for more items!</a></div>
+      </div>
+    </main>
   </body>
 </html>
