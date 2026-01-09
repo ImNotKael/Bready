@@ -15,9 +15,9 @@
     <div class="col-span-2">
     {%for x in cart%}
     
-      <div class="flex flex-row items-center gap-5 border-2xl m-3 py-4 px-4 bg-white rounded">
+      <div class="flex flex-row items-center gap-5 border-2xl m-3 py-4 px-4 bg-white rounded shadow">
       
-        <div><img class="max-h-55 max-w-100 rounded border-1 border-black" src="{{ x['Image'] }}"></div>
+        <div><img class="h-55 w-75 rounded border-1 border-black" src="{{ x['Image'] }}"></div>
         <div><h1 class="text-xl"> {{ x['Name'] }} </h1></div>
         <div>
             <form class="flex justify-center" method="post" action="/cart/{{ x['ProductID'] }}/update_qty">
@@ -39,8 +39,10 @@
     {%endfor%}
     </div>
       <div class="col-end-7">
-        <div class="bg-white">
-        <h1>{{total}}</h1>
+        <div class="bg-white p-10 text-center m-3 rounded shadow">
+          <h1 class="text-3xl">Your total:</h1>
+          <h1 class="text-2xl font-bold m-2">${{total}}</h1>
+          <a class="p-1 hover:bg-orange-100 text-center transition rounded" href="/checkout"> Proceed checkout</a>
         </div>
       </div>
     </main>
