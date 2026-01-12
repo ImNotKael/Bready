@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="min-h-screen bg-gradient-to-b from-orange-300 via-orange-500 to-amber-900">
+    {%include "components/navbar.html.jinja"%}
+    
+    <div class="max-w-7xl mx-auto px-4 py-8">
+
+    
+    <div class="mb-6">
+      <h1 class="text-2xl font-bold text-gray-800">Your transactions</h1>
+    </div>
+
+    
+    <div class="bg-orange-100 rounded-lg shadow overflow-x-auto">
+
+      
+      <table class="min-w-full border-collapse">
+        <thead class="bg-orange-200">
+          <tr>
+            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Order ID</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Customer</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Price</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Status</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Date</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+
+          <tr class="hover:bg-orange-50">
+            <td class="px-6 py-4 text-sm text-gray-700">Insert Order #</td>
+            <td class="px-6 py-4 text-sm text-gray-700">{{'Total'}}</td>
+            <td class="px-6 py-4 text-sm text-gray-700">Insert Price</td>
+            <td class="px-6 py-4">
+              <span class="px-3 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-full">
+                Delivered
+              </span>
+            </td>
+            <td class="px-6 py-4 text-sm text-gray-500">2026-1-12</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+  </body>
+</html>
