@@ -23,27 +23,35 @@
         <thead class="bg-orange-200">
           <tr>
             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Order ID</th>
-            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Customer</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Amount</th>
             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Price</th>
             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Status</th>
             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Date</th>
           </tr>
         </thead>
+        
+        
+        {%for x in orders%}
         <tbody class="divide-y divide-gray-200">
-
+        
           <tr class="hover:bg-orange-50">
-            <td class="px-6 py-4 text-sm text-gray-700">Insert Order #</td>
-            <td class="px-6 py-4 text-sm text-gray-700">Insert Total</td>
-            <td class="px-6 py-4 text-sm text-gray-700">Insert Price</td>
+            
+            <div>
+            <td class="px-6 py-4 text-sm text-gray-700">{{x['ID']}}</td>
+            <td class="px-6 py-4 text-sm text-gray-700">{{x['Quantity']}}</td>
+            <td class="px-6 py-4 text-sm text-gray-700">{{x['Total']}}</td>
             <td class="px-6 py-4">
-              <span class="px-3 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-full">
-                Delivered
+              <span class="px-3 py-1 text-xs font-medium text-yellow-700 bg-yellow-100 rounded-full">
+                Pending
               </span>
             </td>
-            <td class="px-6 py-4 text-sm text-gray-500">2026-1-12</td>
+            <td class="px-6 py-4 text-sm text-gray-500">{{ x['Timestamp'].strftime('%B-%-d-%Y') }}</td>
+            
+            
           </tr>
 
         </tbody>
+        {%endfor%}
       </table>
     </div>
   </div>

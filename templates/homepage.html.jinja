@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bready — Freshly Baked</title>
+    <title>Bready Store - Freshly Baked</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/static/mycss.css" />
   </head>
@@ -51,7 +51,7 @@
             <h3 class="font-semibold">{{ product['Name'] }}</h3>
             <div class="mt-2 flex items-center justify-between">
               <div class="text-amber-700 font-bold">${{ product['Price'] }}</div>
-              <a href="/product/{{ product['Name'] | replace(' ','-') | lower }}" class="text-sm bg-amber-700 text-white px-3 py-1 rounded">View</a>
+              <a href="/product/{{product['ID']}}" class="text-sm bg-amber-700 text-white px-3 py-1 rounded">View</a>
             </div>
           </div>
         </article>

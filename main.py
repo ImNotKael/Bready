@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, flash, redirect , abort
 
 from flask_login import LoginManager, login_user , logout_user , login_required , current_user
 
+from datetime import datetime
+
 import pymysql
 import pymysql.cursors
 
@@ -9,6 +11,7 @@ from dynaconf import Dynaconf
 
 
 app = Flask(__name__)
+
 
 config = Dynaconf(settings_file=["settings.toml"])
 
@@ -263,4 +266,8 @@ def order():
     WHERE `UserID` = %s
     GROUP BY `Sale`.`ID`;
     """ , (current_user.id))
-    return render_template("order.html.jinja")
+    results = cursor.fetchall()
+    
+
+    
+    return render_template("order.html.jinja"  , orders=results ,)
