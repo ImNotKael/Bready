@@ -1,22 +1,44 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>404 Not Found</title>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body class="min-h-screen bg-gradient-to-b from-orange-300 via-orange-500 to-amber-900">
-      {%include "components/navbar.html.jinja"%}
-      <div class="flex flex-col justify-center flex-center">
-        <div>
-        <p>404</p>
+  <body class="min-h-screen bg-gradient-to-b from-orange-500 via-orange-700 to-orange-900">
+    {% include "components/navbar.html.jinja" %}
+
+    <main class="flex items-center justify-center px-6 py-20">
+      <section class="max-w-3xl w-full bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-10 text-center">
+        <div class="flex items-center justify-center">
+            <div class="rounded-full bg-orange-100 p-6">
+              <svg class="w-20 h-20 text-orange-500" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+                <g fill="none" fill-rule="evenodd">
+                  <path d="M8 34c2-10 10-18 28-18s26 8 28 18v10a6 6 0 0 1-6 6H14a6 6 0 0 1-6-6V34z" fill="currentColor"/>
+                  <path d="M12 38c4-6 10-9 20-9s16 3 20 9" fill="#FCE8D3" opacity="0.95"/>
+                  <circle cx="24" cy="30" r="1.8" fill="#ffffff" opacity="0.95"/>
+                  <circle cx="30" cy="28" r="1.8" fill="#ffffff" opacity="0.95"/>
+                  <circle cx="36" cy="29" r="1.8" fill="#ffffff" opacity="0.95"/>
+                  <circle cx="42" cy="31" r="1.8" fill="#ffffff" opacity="0.95"/>
+                </g>
+              </svg>
+            </div>
         </div>
-        <div>
-        <p>It seems that you aren't bready for this page!</p>
+
+        <h1 class="mt-8 text-6xl font-extrabold text-orange-600">404</h1>
+        <p class="mt-4 text-2xl font-semibold text-gray-700">Bread not found</p>
+        <p class="mt-2 text-sm text-gray-600">It seems that you aren't bready to look at this page. How unfortunate.</p>
+
+        <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="/" class="inline-flex items-center justify-center px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-md shadow">
+            Go to Homepage
+          </a>
+          <a href="/browse" class="inline-flex items-center justify-center px-5 py-3 border border-orange-300 text-orange-600 rounded-md hover:bg-orange-50">
+            Browse Products
+          </a>
         </div>
-        <div>
-        <a href="/">Go to homepage</a>
-        </div>
-      </div>
+      </section>
+    </main>
   </body>
 </html>
