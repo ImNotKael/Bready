@@ -2,8 +2,6 @@ from flask import Flask, render_template, request, flash, redirect , abort
 
 from flask_login import LoginManager, login_user , logout_user , login_required , current_user
 
-from datetime import datetime
-
 import pymysql
 import pymysql.cursors
 
@@ -80,12 +78,28 @@ def browse():
 def product_page(product_id):
     connection = connect_db()
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM `Product` WHERE `ID` = %s", (product_id))
+
+    cursor.execute("""
+    SELECT * FROM `Product` WHERE `ID` = %s
+    """ , (product_id))
+
     result = cursor.fetchone()
+    cursor.execute("""
+                   
+    SELECT * FROM `Review`
+    JOIN `User` ON `User`.`ID` = `Review`.`UserID`
+    WHERE `ProductID` = %s
+            
+    """, (product_id))
+    reviews = cursor.fetchall()
+
+
+    
+    
     connection.close()
     if result is None:
         abort(404)
-    return render_template("product.html.jinja", product=result)
+    return render_template("product.html.jinja", product=result , reviews = reviews)
 
 @app.route("/product/<product_id>/add_to_cart" , methods=["POST"])
 @login_required
@@ -267,7 +281,5 @@ def order():
     GROUP BY `Sale`.`ID`;
     """ , (current_user.id))
     results = cursor.fetchall()
-    
-
     
     return render_template("order.html.jinja"  , orders=results ,)

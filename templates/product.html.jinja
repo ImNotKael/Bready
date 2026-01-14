@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buy your {{product['Name']}}</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <body class="min-h-screen bg-gradient-to-b from-orange-300 via-orange-500 to-amber-900">
@@ -24,5 +25,49 @@
             </form>
         </div>
     </div>
+
+  <div class="max-w-6xl mx-auto p-6 bg-orange-100 rounded-xl mt-10 mb-10">
+  
+  <h2 class="text-xl font-semibold text-gray-800 mb-4">
+    Comments
+  </h2>
+
+  
+  <div class="space-y-6 mb-6">
+    
+    <div class="flex gap-4">
+    {%for x in reviews%}
+      <div class="flex-1">
+      
+        <div class="flex items-center justify-between">
+          <h4 class="text-sm font-medium text-gray-900">{{x['Name']}}</h4>
+          <span class="text-xs text-gray-500">{{x['Timestamp'].strftime('%B %-d %Y')}}</span>
+        </div>
+        <p class="mt-1 text-sm text-gray-700">
+          Rating: {{x['Rating']}}/5
+        </p>
+        <p class="mt-1 text-sm text-gray-700">
+          {{x['Comment']}}
+        </p>
+      </div>
+    </div>
+    {%endfor%}
+  
+
+  
+  <form class="space-y-4 mx-auto w-5xl">
+    <textarea
+      rows="3"
+      placeholder="Write a comment..."
+      class="w-full p-3 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+
+    <div class="flex justify-end">
+      <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-orange-600 rounded-lg hover:bg-orange-700 transition">
+        Post Comment
+      </button>
+    </div>
+  </form>
+  </div>
+</div>
   </body>
 </html>
