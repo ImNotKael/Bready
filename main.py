@@ -93,13 +93,24 @@ def product_page(product_id):
     """, (product_id))
     reviews = cursor.fetchall()
 
+    
+    total = 0
+    numbers = len(reviews)
+    for total_sum in reviews:
+        total = total + total_sum['Rating']
+    
+    try:
+        average = total / numbers
+    except ZeroDivisionError:
+        average = 0
+    
 
     
     
     connection.close()
     if result is None:
         abort(404)
-    return render_template("product.html.jinja", product=result , reviews = reviews)
+    return render_template("product.html.jinja", product=result , reviews = reviews , average=average)
 
 @app.route("/product/<product_id>/add_to_cart" , methods=["POST"])
 @login_required
@@ -115,6 +126,22 @@ def add_to_cart(product_id):
     """ , (quantity , product_id , current_user.id , quantity))
     connection.close
     return redirect('/cart')
+
+@app.route("/product/<product_id>/review", methods=["POST"])
+@login_required
+def add_review(product_id):
+    rating = request.form["rating"]
+    comments = request.form["comments"]
+    connection = connect_db()
+    cursor = connection.cursor()
+    cursor.execute("""
+    INSERT INTO `Review`
+            (`Rating` , `Comment` , `UserID` , `ProductID`)
+    VALUES (%s, %s, %s, %s)
+    
+    """ , (rating, comments , current_user.id , product_id))
+    connection.close()
+    return redirect(f"/product/{product_id}")
 
 
 @app.route("/register", methods=["POST" , "GET" ])
@@ -282,4 +309,4 @@ def order():
     """ , (current_user.id))
     results = cursor.fetchall()
     
-    return render_template("order.html.jinja"  , orders=results ,)
+    return render_template("order.html.jinja"  , orders=results)

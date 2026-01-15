@@ -16,6 +16,8 @@
         <div>
             <h1 class="text-3xl m-4"> {{ product['Description'] }} </h1>
             <h1 class="text-3xl m-4">Type: {{ product['Category'] }} </h1>
+            
+            <h1 class="text-3xl m-4">Rating: {{ average | round(1) }} </h1>
             <h1 class="text-3xl m-4">Price: ${{ product['Price'] }} </h1>
             <form method="post" action="/product/{{ product['ID'] }}/add_to_cart">
                 <label>How much you want:</label>
@@ -34,9 +36,8 @@
 
   
   <div class="space-y-6 mb-6">
-    
-    <div class="flex gap-4">
     {%for x in reviews%}
+    <div class="flex gap-4">
       <div class="flex-1">
       
         <div class="flex items-center justify-between">
@@ -55,11 +56,42 @@
   
 
   
-  <form class="space-y-4 mx-auto w-5xl">
-    <textarea
-      rows="3"
-      placeholder="Write a comment..."
-      class="w-full p-3 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+  <form method="post" class="space-y-4 mb-10 bg-orange-100 p-6 rounded shadow mx-auto w-5xl" action="/product/{{ product['ID'] }}/review">
+    <div class="flex flex-row-reverse justify-center gap-1">
+      
+      <input name="rating" value="5" type="radio" name="rating" id="star5" class="peer hidden">
+      <label for="star5"
+        class="cursor-pointer text-gray-300 text-4xl peer-checked:text-yellow-400 hover:text-yellow-400">
+        ★
+      </label>
+
+      <input name="rating" value="4" type="radio" name="rating" id="star4" class="peer hidden">
+      <label for="star4"
+        class="cursor-pointer text-gray-300 text-4xl peer-checked:text-yellow-400 hover:text-yellow-400">
+        ★
+      </label>
+
+      <input name="rating" value="3" type="radio" name="rating" id="star3" class="peer hidden">
+      <label for="star3"
+        class="cursor-pointer text-gray-300 text-4xl peer-checked:text-yellow-400 hover:text-yellow-400">
+        ★
+      </label>
+
+      <input name="rating" value="2" type="radio" name="rating" id="star2" class="peer hidden">
+      <label for="star2"
+        class="cursor-pointer text-gray-300 text-4xl peer-checked:text-yellow-400 hover:text-yellow-400">
+        ★
+      </label>
+
+      <input name="rating" value="1" type="radio" name="rating" id="star1" class="peer hidden">
+      <label for="star1"
+        class="cursor-pointer text-gray-300 text-4xl peer-checked:text-yellow-400 hover:text-yellow-400">
+        ★
+      </label>
+      <h1 class="text-2xl font-semibold">Rating:</h1>
+    </div>
+
+    <textarea name="comments" rows="3" placeholder="Write a comment..." class="w-full p-3 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
 
     <div class="flex justify-end">
       <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-orange-600 rounded-lg hover:bg-orange-700 transition">
