@@ -6,52 +6,39 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="/static/mycss.css" rel="stylesheet" type="text/css">
   </head>
-  <body class="min-h-screen bg-gradient-to-b from-orange-300 via-orange-500 to-amber-900">
+  <body class="min-h-screen bg-gradient-to-b from-orange-300 via-orange-200 to-amber-50">
     {%include "components/navbar.html.jinja"%}
 
-    {% if cart %}
-    <h1 class="text-center font-bold text-4xl m-4">Your cart</h1>
-    <main class="m-auto w-350 grid grid-cols-2 gap-5">
-    <div class="col-span-2">
-    {%for x in cart%}
-    
-      <div class="flex flex-row items-center gap-5 border-2xl m-3 py-4 px-4 bg-white rounded shadow">
-      
-        <div><img class="h-55 w-75 rounded border-1 border-black" src="{{ x['Image'] }}"></div>
-        <div><h1 class="text-xl"> {{ x['Name'] }} </h1></div>
-        <div>
-            <form class="flex justify-center" method="post" action="/cart/{{ x['ProductID'] }}/update_qty">
-                <input class="w-8 hover:bg-white" name="qty" type="number" value="{{x['Quantity']}}">
-                <button class="hover:bg-orange-300 p-2 cursor-pointer" type="submit">Update</button>
-            </form>
-        </div>
-        <div>
-          <form method="post" action="/cart/{{ x['ProductID'] }}/delete_qty">
-            <button class="hover:bg-orange-300 p-2 cursor-pointer" type="submit">Delete</button>
-          </form>
-        </div>
-        <div><h1 class="text-xl"> Price: {{ x['Price'] }} </h1></div>
-        <div><h1 class="text-xl"> Total price: {{ x['Price'] * x['Quantity'] }} </h1></div>
-        
-      </div>
-      
-   
-    {%endfor%}
-    </div>
-      <div class="col-end-7">
-        <div class="bg-white p-10 text-center m-3 rounded shadow">
-          <h1 class="text-3xl">Your total:</h1>
-          <h1 class="text-2xl font-bold m-2">${{total}}</h1>
-          <a class="p-1 hover:bg-orange-100 text-center transition rounded" href="/checkout"> Proceed checkout</a>
+    <div class="container mx-auto p-6">
+      <h1 class="text-3xl font-bold text-center text-white mb-6">Your Cart</h1>
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <table class="table-auto w-full">
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="px-4 py-2 text-left">Item</th>
+              <th class="px-4 py-2 text-left">Quantity</th>
+              <th class="px-4 py-2 text-left">Price</th>
+              <th class="px-4 py-2 text-left">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in cart %}
+            <tr>
+              <td class="border px-4 py-2">{{ item['Name'] }}</td>
+              <td class="border px-4 py-2">{{ item['Quantity'] }}</td>
+              <td class="border px-4 py-2">${{ item['Price'] }}</td>
+              <td class="border px-4 py-2">${{ item['Price'] * item['Quantity'] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="flex justify-between items-center mt-6">
+          <p class="text-lg font-semibold">Total: ${{ cart_total }}</p>
+          <a href="/checkout" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+            Proceed to Checkout
+          </a>
         </div>
       </div>
-    </main>
-    {%else%}
-    <h1 class="text-center font-bold text-4xl m-4">You have nothing in your cart</h1>
-
-    <div class="flex justify-center">
-    <a class="text-black bg-orange-100 p-5 hover:bg-orange-600 hover:text-white transition" href="/browse">Browse here!</a>
     </div>
-    {%endif%}
   </body>
 </html>

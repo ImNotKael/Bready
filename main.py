@@ -104,9 +104,6 @@ def product_page(product_id):
     except ZeroDivisionError:
         average = 0
     
-
-    
-    
     connection.close()
     if result is None:
         abort(404)

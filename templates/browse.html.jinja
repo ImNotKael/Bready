@@ -13,7 +13,7 @@
       <h1 class="text-4xl font-extrabold text-white m-4">All Bread products</h1>
     </header>
 
-  <main class="grid grid-cols-4 gap-5 max-w-4xl mx-auto p-6 mb-5 rounded shadow-2xl text-center">
+  <main class="grid grid-cols-4 gap-5 max-w-300 mx-auto p-6 mb-5 rounded shadow-2xl text-center">
     {% for x in products %}
       <a href="/product/{{x['ID']}}" class="grid rounded shadow bg-orange-100 hover:bg-orange-200 transition border-2 border-black">
       <img class="h-25 mx-auto mt-4 w-40 rounded border-1 border-black" src="{{ x['Image'] }}" width="300" height="300">
